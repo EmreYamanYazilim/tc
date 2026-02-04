@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+
+
+  /* 1. Gölge Tanımlamaları (Kart Görünümü İçin) */
+  --shadow-header: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-dropdown: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* v4.1 ile artık @layer base kullanmak yerine direkt CSS yazıyoruz */
+@layer base {
+  body {
+    @apply antialiased bg-gray-50 text-gray-900;
+  }
+}
