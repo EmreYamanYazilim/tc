@@ -22,6 +22,8 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/kayit-ol', [RegisterController::class, 'create'])->name('register');
     Route::post('/kayit-ol', [RegisterController::class, 'store']);
+    Route::get('/kurumsal-kayit', [RegisterController::class, 'showCompanyRegistrationForm'])->name('register.company');
+    Route::post('/kurumsal-kayit', [RegisterController::class, 'registerCompany'])->name('register.company.store');
     Route::get('/giris-yap', [LoginController::class, 'create'])->name('login');
     Route::post('/giris-yap', [LoginController::class, 'store']);
 });

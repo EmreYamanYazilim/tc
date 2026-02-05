@@ -82,14 +82,14 @@
                             <svg class="w-4 h-4 transition-transform" :class="{'rotate-180': userOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="userOpen" x-transition class="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 py-1 z-50" style="display: none;">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold">İlan ver</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold rounded-t-lg">İlan ver</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold">Profilim</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold">ilanlarım</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold">Mesajlarım</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 font-bold">favorilerim</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-bold">Çıkış Yap</button>
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 rounded-b-lg font-bold">Çıkış Yap</button>
                             </form>
                         </div>
                     </div>

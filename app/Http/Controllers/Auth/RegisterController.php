@@ -4,33 +4,56 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest; // Bireysel için
+use App\Http\Requests\Auth\CompanyRegisterRequest; // Kurumsal için (YENİ)
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    // Kayıt formunu gösterir
+    // Bireysel Kayıt Formu
     public function create()
     {
         return view('auth.register');
     }
 
-    // Kayıt işlemini yapar
+    // Bireysel Kayıt İşlemi
     public function store(RegisterRequest $request)
     {
-        // Buraya geldiyse, Request katmanından geçmiş ve veriler güvenli demektir.
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            // 'type' => 'individual', // İleride gerekirse
         ]);
 
-        // Kayıt olur olmaz giriş yaptır
         Auth::login($user);
 
-        // Ana sayfaya yönlendir
         return redirect()->route('home');
+    }
+
+    // Kurumsal Kayıt Formu
+    public function showCompanyRegistrationForm()
+    {
+        return view('auth.company-register');
+    }
+
+    // Kurumsal Kayıt İşlemi (Validation Request'e taşındı)
+    public function registerCompany(CompanyRegisterRequest $request)
+    {
+        //  Kullanıcıyı Oluştur (User Tablosu)
+        $user = User::create([
+            'name' => $request->name . ' ' . $request->surname, // Ad ve Soyadı birleştirdik
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            // 'type' => 'corporate', // Veritabanında type sütunu varsa
+        ]);
+
+
+        //  Giriş Yap ve Yönlendir
+        Auth::login($user);
+
+        return redirect()->route('home')->with('success', 'Kurumsal üyeliğiniz oluşturulduğunda  size bilgi verilecektir.');
     }
 }
