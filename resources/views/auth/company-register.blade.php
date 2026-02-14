@@ -12,17 +12,18 @@
                 </div>
 
                 <div class="mb-10">
-                    <div class="bg-gray-100 p-2 rounded-xl flex items-center justify-between gap-3">
-                        <a href="{{ route('register') }}"
-                            class="flex-1 py-3 rounded-lg bg-transparent text-gray-500 font-bold hover:text-purple-600 hover:bg-white/50 transition-all text-center">
-                            Bireysel Kayıt
-                        </a>
-                        <button type="button"
-                            class="flex-1 py-3 rounded-lg bg-purple-600 text-white font-bold shadow-md shadow-purple-100 ring-1 ring-black/5 transition-all cursor-default">
-                            Kurumsal Kayıt
-                        </button>
-                    </div>
-                </div>
+    <div class="bg-gray-100 p-2 rounded-xl flex items-center justify-between gap-3">
+        <a href="{{ route('register') }}"
+            class="flex-1 py-3 rounded-lg bg-transparent text-purple-600 font-bold hover:text-purple-600 hover:bg-white/50 transition-all text-center">
+            Bireysel Kayıt
+        </a>
+        <button type="button"
+            class="flex-1 py-3 rounded-lg bg-purple-600 text-white font-bold shadow-md shadow-purple-100 ring-1 ring-black/5 transition-all cursor-default">
+            Kurumsal Kayıt
+        </button>
+    </div>
+</div>
+
 
                 @if ($errors->any())
                     <div class="mb-6 p-4 bg-red-50 text-red-600 rounded-xl text-sm border border-red-100">
