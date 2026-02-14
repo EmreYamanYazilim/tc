@@ -1,37 +1,32 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
-// Route::get('/', function () {
-//     return view('home');
-// });
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
 Route::get('/ilan', function () {
-    return view('listings.show'); // listings klasöründeki show dosyasını aç
-});
+    return view('listings.show');
+})->name('listings.show');
 
-
-// MİSAFİR GRUBU (Sadece giriş yapmamışlar görebilir)
 Route::middleware('guest')->group(function () {
-
+    // Kayıt
     Route::get('/kayit-ol', [RegisterController::class, 'create'])->name('register');
     Route::post('/kayit-ol', [RegisterController::class, 'store']);
+
+    // Kurumsal kayıt
     Route::get('/kurumsal-kayit', [RegisterController::class, 'showCompanyRegistrationForm'])->name('register.company');
     Route::post('/kurumsal-kayit', [RegisterController::class, 'registerCompany'])->name('register.company.store');
+
+    // Giriş
     Route::get('/giris-yap', [LoginController::class, 'create'])->name('login');
     Route::post('/giris-yap', [LoginController::class, 'store']);
 });
 
-
-// 3. ÜYE GRUBU (Giriş Yapmış Olanlar)
 Route::middleware('auth')->group(function () {
-
-    // Çıkış Yapma Rotası
+    // Çıkış
     Route::post('/cikis-yap', [LoginController::class, 'destroy'])->name('logout');
 });
