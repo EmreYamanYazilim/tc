@@ -8,40 +8,63 @@ class CompanyRegisterRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // Herkes kayıt olabilir
+        return true;
     }
 
     public function rules(): array
     {
         return [
-            // Kişisel Bilgiler
+            // Yetkili Bilgileri
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:8'], // Şifre zorunlu
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
 
-            // Şirket Bilgileri
+            // Firma & İletişim
             'company_short_name' => ['required', 'string', 'max:255'],
             'company_official_name' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string'],
-            'district' => ['required', 'string'],
+            'city' => ['required', 'string', 'max:255'],
+            'district' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:1000'],
             'auth_doc_no' => ['nullable', 'string', 'max:50'],
-
-            // Eğer company_type (Emlak/İnşaat) radio butonlarını geri eklersek burayı aç:
-            // 'company_type' => ['required', 'string'],
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
+            'name' => 'Ad',
+            'surname' => 'Soyad',
+            'phone' => 'Cep Telefonu',
+            'email' => 'E-posta Adresi',
+            'password' => 'Şifre',
             'company_short_name' => 'Şirket Kısa Adı',
             'company_official_name' => 'Şirket Resmi Adı',
-            'auth_doc_no' => 'Yetki Belgesi No',
-            'district' => 'İlçe',
             'city' => 'İl',
+            'district' => 'İlçe',
+            'address' => 'Açık Adres',
+            'auth_doc_no' => 'Taşınmaz Ticareti Yetki Belgesi No',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Ad alanı zorunludur.',
+            'surname.required' => 'Soyad alanı zorunludur.',
+            'phone.required' => 'Cep telefonu alanı zorunludur.',
+            'email.required' => 'E-posta adresi zorunludur.',
+            'email.email' => 'Geçerli bir e-posta adresi giriniz.',
+            'email.unique' => 'Bu e-posta adresi zaten kayıtlı.',
+            'password.required' => 'Şifre alanı zorunludur.',
+            'password.confirmed' => 'Şifreler birbiriyle uyuşmuyor.',
+            'password.min' => 'Şifre en az 8 karakter olmalıdır.',
+            'company_short_name.required' => 'Şirket kısa adı zorunludur.',
+            'company_official_name.required' => 'Şirket resmi adı zorunludur.',
+            'city.required' => 'İl seçimi zorunludur.',
+            'district.required' => 'İlçe seçimi zorunludur.',
+            'address.required' => 'Adres alanı zorunludur.',
         ];
     }
 }

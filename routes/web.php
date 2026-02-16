@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\CompanyRegisterController;
 
 Route::get('/', function () {
     return view('home');
@@ -18,8 +19,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/kayit-ol', [RegisterController::class, 'store']);
 
     // Kurumsal kayıt
-    Route::get('/kurumsal-kayit', [RegisterController::class, 'showCompanyRegistrationForm'])->name('register.company');
-    Route::post('/kurumsal-kayit', [RegisterController::class, 'registerCompany'])->name('register.company.store');
+    Route::get('/kurumsal-kayit', [CompanyRegisterController::class, 'create'])->name('register.company');
+    Route::post('/kurumsal-kayit', [CompanyRegisterController::class, 'store'])->name('register.company.store');
 
     // Giriş
     Route::get('/giris-yap', [LoginController::class, 'create'])->name('login');
